@@ -9,7 +9,7 @@ This project is currently in development. Future additions will include:
 * Monitor class by section or professor
 * GUI
 
-```class_search.python``` was derived from another project located at https://github.com/remiliacn/ASU-Class-Search
+```class_search.py``` was derived from another project located at https://github.com/remiliacn/ASU-Class-Search
 which uses the GNU Affera General Public License v3.0. This means that ASUCN also uses this license.
 
 For more information, see the included LICENSE file.
