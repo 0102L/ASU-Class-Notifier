@@ -1,28 +1,35 @@
 from time import time, sleep
 from datetime import datetime
-from class_avail import seat_check, class_list, open_sections
+from class_search import ASUSearch
 
 def main():
+    """
+    Main def that runs the script.
+    """
     # Take user input
     dept_code = input("Enter course subject: ")
     course_code = input("Enter course number: ")
     
+    api = ASUSearch(dept_code, course_code)
     # Start timed course check
     print("\nSearching for course sections...")
-    sections = class_list(dept_code, course_code)
-    if sections != "Error. No response.":
+    sections = api.__str__()
+    if sections != "Error":
         print("\nFound the following sections: ")
-        print("Section\tSeats\tProfessor")
+        print("Section\tSeats\tInstructor")
         print(sections)
         start = time()
+        # Loop until an open section is found.
         while True:
-            space_avail = seat_check(dept_code, course_code)
+            # Create a new search to refresh data
+            api = ASUSearch(dept_code, course_code)
+            space_avail = api.any_space()
             if space_avail:
-                open_courses = open_sections(dept_code, course_code)
-                
-                print("[" + datetime.now().isoformat(sep=' ', timespec='seconds') + "] " + "Space available for the following sections: ")
-                print("Section\tSeats\tProfessor")
-                print(open_courses)
+                open_sections = api.open_sections()
+                print("[" + datetime.now().isoformat(sep=' ', timespec='seconds') + "] " + "Space available for the following section(s): ")
+                print("Section\tSeats\tInstructor")
+                for section in open_sections:
+                    print(section)
                 input("Press any key to exit.")
                 break
             else:
@@ -39,5 +46,7 @@ def main():
     else:
         input("\nThere are currently no classes offered that match your criteria.\nPress any key to exit.")
 
+
+# Used to run script
 if __name__ == "__main__":
     main()
