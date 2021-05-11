@@ -1,4 +1,4 @@
-ASU Class Notifier (ASUCN) was created to help ASU students know when space opens in a full class.
+ASU Class Notifier (ASUCN) was created to help students at Arizona State University enroll in full classes.
 
 Installation:
 * To get started, run ```pip install -r requirements.txt``` in your Python environment.
